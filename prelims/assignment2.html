@@ -1,0 +1,123 @@
+<!-- assignment2.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 2 - Prelims</title>
+  <link rel="stylesheet" href="../assets/css/assignment.css">
+</head>
+<style>
+  .next-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+
+  .next-btn:hover {
+    background: #218838;
+  }
+</style>
+<body>
+  <div class="assignment-container">
+    <h2>Assignment 2: History - Indian Freedom Struggle</h2>
+    <form id="quizForm2">
+      <ol>
+        <li>Who was the founder of the Indian National Congress?
+          <br><input type="radio" name="q1" value="A"> A. Dadabhai Naoroji
+          <br><input type="radio" name="q1" value="B"> B. A.O. Hume
+          <br><input type="radio" name="q1" value="C"> C. B.G. Tilak
+        </li>
+        <li>In which year did the Jallianwala Bagh massacre occur?
+          <br><input type="radio" name="q2" value="A"> A. 1919
+          <br><input type="radio" name="q2" value="B"> B. 1920
+          <br><input type="radio" name="q2" value="C"> C. 1930
+        </li>
+        <li>The Non-Cooperation Movement was launched by:
+          <br><input type="radio" name="q3" value="A"> A. Mahatma Gandhi
+          <br><input type="radio" name="q3" value="B"> B. Subhas Chandra Bose
+          <br><input type="radio" name="q3" value="C"> C. Sardar Patel
+        </li>
+        <li>Dandi March was related to:
+          <br><input type="radio" name="q4" value="A"> A. Protest against Rowlatt Act
+          <br><input type="radio" name="q4" value="B"> B. Salt Law
+          <br><input type="radio" name="q4" value="C"> C. Civil Disobedience
+        </li>
+        <li>Who gave the slogan "Give me blood and I shall give you freedom"?
+          <br><input type="radio" name="q5" value="A"> A. Mahatma Gandhi
+          <br><input type="radio" name="q5" value="B"> B. Jawaharlal Nehru
+          <br><input type="radio" name="q5" value="C"> C. Subhas Chandra Bose
+        </li>
+        <li>The Quit India Movement was launched in:
+          <br><input type="radio" name="q6" value="A"> A. 1940
+          <br><input type="radio" name="q6" value="B"> B. 1942
+          <br><input type="radio" name="q6" value="C"> C. 1945
+        </li>
+        <li>Who was the Viceroy of India during the Revolt of 1857?
+          <br><input type="radio" name="q7" value="A"> A. Lord Dalhousie
+          <br><input type="radio" name="q7" value="B"> B. Lord Canning
+          <br><input type="radio" name="q7" value="C"> C. Lord Curzon
+        </li>
+        <li>The first war of Indian independence is also known as:
+          <br><input type="radio" name="q8" value="A"> A. Revolt of 1857
+          <br><input type="radio" name="q8" value="B"> B. Sepoy Mutiny
+          <br><input type="radio" name="q8" value="C"> C. Both A and B
+        </li>
+        <li>Which organization was formed by Subhas Chandra Bose?
+          <br><input type="radio" name="q9" value="A"> A. Indian National Congress
+          <br><input type="radio" name="q9" value="B"> B. Azad Hind Fauj
+          <br><input type="radio" name="q9" value="C"> C. Swaraj Party
+        </li>
+        <li>Who wrote the book "Discovery of India"?
+          <br><input type="radio" name="q10" value="A"> A. Jawaharlal Nehru
+          <br><input type="radio" name="q10" value="B"> B. M.K. Gandhi
+          <br><input type="radio" name="q10" value="C"> C. B.R. Ambedkar
+        </li>
+      </ol>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <div class="references">
+      <h3>📚 Reference Materials:</h3>
+      <ul>
+        <li><a href="https://ncert.nic.in/textbook.php?ihhn1=0-10" target="_blank">NCERT Class 12 History - Freedom Struggle</a></li>
+        <li><a href="https://www.pmfias.com/indian-national-movement/" target="_blank">PMF IAS - National Movement</a></li>
+      </ul>
+    </div>
+
+    <div class="video-section">
+      <h3>🎥 Watch: India's Struggle for Independence</h3>
+      <li><a href="https://www.youtube.com/live/UzYKBaJvnsg?si=98X-pRU7M1b7JTq3" target="_blank">India's Struggle for Independence</a></li>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("quizForm2").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const answers = ["B", "A", "A", "B", "C", "B", "B", "C", "B", "A"];
+      let score = 0;
+      for (let i = 1; i <= 10; i++) {
+        const selected = document.querySelector(`input[name='q${i}']:checked`);
+        if (selected && selected.value === answers[i - 1]) {
+          score++;
+        }
+      }
+      alert(`✅ You scored: ${score}/10`);
+      localStorage.setItem("assignment2", score);
+      localStorage.setItem("assignment2-complete", true); // store completion flag
+
+    // Show next assignment button
+    const nextBtn = document.createElement("a");
+    nextBtn.href = "assignment3.html";
+    nextBtn.innerText = "Next Assignment →";
+    nextBtn.className = "next-btn";
+    document.querySelector(".assignment-container").appendChild(nextBtn);
+    });
+  </script>
+</body>
+</html>

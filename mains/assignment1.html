@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mains Assignment 1</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f3f9ff, #e6f2ff);
+      margin: 0;
+      padding: 40px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    h2 { color: #004080; }
+    .question {
+      background: #f0f8ff;
+      padding: 20px;
+      border-left: 6px solid #2196f3;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 1rem;
+    }
+    .btn {
+      margin: 10px 10px 0 0;
+      padding: 12px 20px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .btn:hover { background: #0d47a1; }
+    .feedback {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    #nextBtn, #downloadBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>📝 Mains Assignment 1</h2>
+    <div class="question">
+      <strong>Essay Topic:</strong><br>
+      "The Role of Technology in Strengthening Indian Democracy – Discuss the opportunities and challenges."
+    </div>
+
+    <textarea id="answer" placeholder="Write your essay here..."></textarea>
+    <br>
+    <button class="btn" onclick="submitAnswer()">✅ Submit Assignment</button>
+    <button class="btn" id="downloadBtn" onclick="downloadAnswer()">⬇️ Download Answer</button>
+    <a href="assignment2.html" class="btn" id="nextBtn">⏭️ Next Assignment</a>
+    
+    <div class="feedback" id="feedbackMsg"></div>
+  </div>
+
+  <script>
+    const answerBox = document.getElementById("answer");
+    const feedback = document.getElementById("feedbackMsg");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    const keywords = [
+      "technology",
+      "transparency",
+      "governance",
+      "digital",
+      "participation",
+      "e-governance",
+      "democracy"
+    ];
+
+    // Load saved answer
+    const saved = localStorage.getItem("mainsAssignment1");
+    if (saved) answerBox.value = saved;
+
+    function evaluateAnswer(text) {
+      let score = 0;
+      const lowerText = text.toLowerCase();
+      keywords.forEach(kw => {
+        if (lowerText.includes(kw)) score++;
+      });
+      return score;
+    }
+
+    function submitAnswer() {
+      const answer = answerBox.value.trim();
+      if (answer.length < 100) {
+        feedback.innerText = "❌ Your answer is too short. Please write at least 100 characters.";
+        feedback.style.color = "red";
+        return;
+      }
+
+      const score = evaluateAnswer(answer);
+      let feedbackText = `✅ Assignment submitted! Your keyword score: ${score}/${keywords.length}. `;
+
+      if (score >= 5) {
+        feedbackText += "Excellent coverage of key ideas! ✅";
+      } else if (score >= 3) {
+        feedbackText += "Good attempt. Try to include more core concepts.";
+      } else {
+        feedbackText += "You may need to review the topic and expand your ideas.";
+      }
+
+      localStorage.setItem("mainsAssignment1", answer);
+      feedback.innerText = feedbackText;
+      feedback.style.color = "green";
+      downloadBtn.style.display = "inline-block";
+      nextBtn.style.display = "inline-block";
+    }
+
+    function downloadAnswer() {
+      const answer = answerBox.value.trim();
+      const blob = new Blob([answer], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "Mains_Assignment1.txt";
+      link.click();
+    }
+  </script>
+</body>
+</html>

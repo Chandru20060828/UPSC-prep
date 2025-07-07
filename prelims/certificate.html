@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prelims Certificate</title>
+  <link rel="stylesheet" href="../assets/css/assignment.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #e1f5fe, #fffde7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0;
+    }
+    .certificate {
+      width: 800px;
+      background: white;
+      padding: 40px;
+      border: 10px solid #00897b;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+    .certificate h1 {
+      font-size: 2.8em;
+      color: #00796b;
+      margin-bottom: 10px;
+    }
+    .certificate h2 {
+      font-size: 2em;
+      color: #333;
+      margin: 20px 0 10px;
+    }
+    .certificate p {
+      font-size: 1.1em;
+      color: #444;
+      margin: 10px 0;
+    }
+    .cert-name {
+      font-size: 1.5em;
+      font-weight: bold;
+      margin: 20px 0;
+      color: #00796b;
+    }
+    .download-btn {
+      margin-top: 30px;
+      background: #00796b;
+      color: white;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .download-btn:hover {
+      background: #004d40;
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate" id="certificateContent">
+    <h1>Certificate of Achievement</h1>
+    <h2>UPSC Prelims Program</h2>
+    <p>This certificate is awarded to</p>
+    <div class="cert-name" id="certName">[Your Name]</div>
+    <p>for successfully completing all assignments and passing the final assessment of the UPSC Prelims Learning Module.</p>
+    <p>Date: <span id="certDate"></span></p>
+    <button class="download-btn" onclick="downloadCertificate()">📥 Download Certificate</button>
+  </div>
+
+  <script>
+    // Get name from localStorage (optional - modify as needed)
+    const name = localStorage.getItem("userName") || "Learner";
+    document.getElementById("certName").innerText = name;
+
+    // Show current date
+    const date = new Date().toLocaleDateString();
+    document.getElementById("certDate").innerText = date;
+
+    // Download certificate as image
+    function downloadCertificate() {
+      html2canvas(document.querySelector("#certificateContent")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "UPSC-Prelims-Certificate.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    }
+  </script>
+
+  <!-- Include html2canvas library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>

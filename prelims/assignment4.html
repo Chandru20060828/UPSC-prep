@@ -1,0 +1,123 @@
+<!-- assignment4.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 4 - Prelims</title>
+  <link rel="stylesheet" href="../assets/css/assignment.css">
+</head>
+<style>
+  .next-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+
+  .next-btn:hover {
+    background: #218838;
+  }
+</style>
+<body>
+  <div class="assignment-container">
+    <h2>Assignment 4: Science & Technology - Space Technology</h2>
+    <form id="quizForm4">
+      <ol>
+        <li>Which Indian organization is responsible for space research?
+          <br><input type="radio" name="q1" value="A"> A. DRDO
+          <br><input type="radio" name="q1" value="B"> B. ISRO
+          <br><input type="radio" name="q1" value="C"> C. BARC
+        </li>
+        <li>India's first satellite was:
+          <br><input type="radio" name="q2" value="A"> A. Bhaskara
+          <br><input type="radio" name="q2" value="B"> B. Aryabhata
+          <br><input type="radio" name="q2" value="C"> C. INSAT-1A
+        </li>
+        <li>Chandrayaan-2 was launched to explore:
+          <br><input type="radio" name="q3" value="A"> A. Mars
+          <br><input type="radio" name="q3" value="B"> B. Moon
+          <br><input type="radio" name="q3" value="C"> C. Venus
+        </li>
+        <li>Which satellite is used for weather forecasting?
+          <br><input type="radio" name="q4" value="A"> A. INSAT
+          <br><input type="radio" name="q4" value="B"> B. Cartosat
+          <br><input type="radio" name="q4" value="C"> C. RISAT
+        </li>
+        <li>ISRO was established in the year:
+          <br><input type="radio" name="q5" value="A"> A. 1965
+          <br><input type="radio" name="q5" value="B"> B. 1969
+          <br><input type="radio" name="q5" value="C"> C. 1972
+        </li>
+        <li>What does PSLV stand for?
+          <br><input type="radio" name="q6" value="A"> A. Polar Satellite Launch Vehicle
+          <br><input type="radio" name="q6" value="B"> B. Planetary Satellite Launch Vehicle
+          <br><input type="radio" name="q6" value="C"> C. Permanent Space Launch Vehicle
+        </li>
+        <li>Which Indian mission aimed to study Mars?
+          <br><input type="radio" name="q7" value="A"> A. Chandrayaan
+          <br><input type="radio" name="q7" value="B"> B. Mangalyaan
+          <br><input type="radio" name="q7" value="C"> C. Astrosat
+        </li>
+        <li>Gaganyaan mission is related to:
+          <br><input type="radio" name="q8" value="A"> A. India's first manned space mission
+          <br><input type="radio" name="q8" value="B"> B. Study of the sun
+          <br><input type="radio" name="q8" value="C"> C. Satellite Navigation
+        </li>
+        <li>Which Indian satellite is used for communication?
+          <br><input type="radio" name="q9" value="A"> A. IRS
+          <br><input type="radio" name="q9" value="B"> B. INSAT
+          <br><input type="radio" name="q9" value="C"> C. CARTOSAT
+        </li>
+        <li>Astrosat is related to:
+          <br><input type="radio" name="q10" value="A"> A. Earth observation
+          <br><input type="radio" name="q10" value="B"> B. Climate monitoring
+          <br><input type="radio" name="q10" value="C"> C. Astronomy
+        </li>
+      </ol>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <div class="references">
+      <h3>📚 Reference Materials:</h3>
+      <ul>
+        <li><a href="https://www.isro.gov.in" target="_blank">ISRO Official Website</a></li>
+        <li><a href="https://ncert.nic.in/textbook.php?iesc1=0-9" target="_blank">NCERT Class 11 Science</a></li>
+      </ul>
+    </div>
+
+    <div class="video-section">
+      <h3>🎥 Watch: India in Space</h3>
+      <li><a href="https://youtu.be/p4pqOkjfoN4?si=g441GAvN6hgxrbVD" target="_blank">India in Space</a></li>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("quizForm4").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const answers = ["B", "B", "B", "A", "B", "A", "B", "A", "B", "C"];
+      let score = 0;
+      for (let i = 1; i <= 10; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && selected.value === answers[i - 1]) {
+          score++;
+        }
+      }
+      alert(`✅ You scored: ${score}/10`);
+      localStorage.setItem("assignment4", score);
+      localStorage.setItem("assignment4-complete", true); // store completion flag
+
+    // Show next assignment button
+    const nextBtn = document.createElement("a");
+    nextBtn.href = "assignment5.html";
+    nextBtn.innerText = "Next Assignment →";
+    nextBtn.className = "next-btn";
+    document.querySelector(".assignment-container").appendChild(nextBtn);
+    });
+  </script>
+</body>
+</html>

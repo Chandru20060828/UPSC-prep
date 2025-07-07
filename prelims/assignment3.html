@@ -1,0 +1,123 @@
+<!-- assignment3.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 3 - Prelims</title>
+  <link rel="stylesheet" href="../assets/css/assignment.css">
+</head>
+<style>
+  .next-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+
+  .next-btn:hover {
+    background: #218838;
+  }
+</style>
+<body>
+  <div class="assignment-container">
+    <h2>Assignment 3: Geography - Indian Physical Geography</h2>
+    <form id="quizForm3">
+      <ol>
+        <li>Which is the highest mountain peak in India?
+          <br><input type="radio" name="q1" value="A"> A. Mount Everest
+          <br><input type="radio" name="q1" value="B"> B. Kanchenjunga
+          <br><input type="radio" name="q1" value="C"> C. Nanda Devi
+        </li>
+        <li>The Indian desert is located in:
+          <br><input type="radio" name="q2" value="A"> A. Rajasthan
+          <br><input type="radio" name="q2" value="B"> B. Gujarat
+          <br><input type="radio" name="q2" value="C"> C. Punjab
+        </li>
+        <li>Which river originates from Amarkantak plateau?
+          <br><input type="radio" name="q3" value="A"> A. Narmada
+          <br><input type="radio" name="q3" value="B"> B. Tapi
+          <br><input type="radio" name="q3" value="C"> C. Godavari
+        </li>
+        <li>The Western Ghats are also known as:
+          <br><input type="radio" name="q4" value="A"> A. Sahyadri
+          <br><input type="radio" name="q4" value="B"> B. Nilgiri
+          <br><input type="radio" name="q4" value="C"> C. Satpura
+        </li>
+        <li>The Sunderbans are famous for:
+          <br><input type="radio" name="q5" value="A"> A. Coral reefs
+          <br><input type="radio" name="q5" value="B"> B. Mangrove forests
+          <br><input type="radio" name="q5" value="C"> C. Sand dunes
+        </li>
+        <li>Which is the longest river in India?
+          <br><input type="radio" name="q6" value="A"> A. Yamuna
+          <br><input type="radio" name="q6" value="B"> B. Godavari
+          <br><input type="radio" name="q6" value="C"> C. Ganga
+        </li>
+        <li>Which of the following is a major soil type in India?
+          <br><input type="radio" name="q7" value="A"> A. Tundra
+          <br><input type="radio" name="q7" value="B"> B. Alluvial
+          <br><input type="radio" name="q7" value="C"> C. Podzol
+        </li>
+        <li>The Tropic of Cancer passes through how many Indian states?
+          <br><input type="radio" name="q8" value="A"> A. 8
+          <br><input type="radio" name="q8" value="B"> B. 9
+          <br><input type="radio" name="q8" value="C"> C. 10
+        </li>
+        <li>Which is the largest plateau in India?
+          <br><input type="radio" name="q9" value="A"> A. Malwa
+          <br><input type="radio" name="q9" value="B"> B. Chota Nagpur
+          <br><input type="radio" name="q9" value="C"> C. Deccan Plateau
+        </li>
+        <li>The Himalayas are an example of:
+          <br><input type="radio" name="q10" value="A"> A. Fold mountains
+          <br><input type="radio" name="q10" value="B"> B. Block mountains
+          <br><input type="radio" name="q10" value="C"> C. Volcanic mountains
+        </li>
+      </ol>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <div class="references">
+      <h3>📚 Reference Materials:</h3>
+      <ul>
+        <li><a href="https://ncert.nic.in/textbook.php?jess1=0-9" target="_blank">NCERT Class 11 Geography</a></li>
+        <li><a href="https://www.pmfias.com/indian-physical-geography/" target="_blank">PMF IAS - Indian Physical Geography</a></li>
+      </ul>
+    </div>
+
+    <div class="video-section">
+      <h3>🎥 Watch: Indian Physical Features Explained</h3>
+      <li><a href="https://youtu.be/sYCDWyzxU2Q?si=xmRJcxuhVCHJfNkV" target="_blank">Indian Physical features and continue the play list</a></li>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("quizForm3").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const answers = ["B", "A", "A", "A", "B", "C", "B", "C", "C", "A"];
+      let score = 0;
+      for (let i = 1; i <= 10; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && selected.value === answers[i - 1]) {
+          score++;
+        }
+      }
+      alert(`✅ You scored: ${score}/10`);
+      localStorage.setItem("assignment3", score);
+      localStorage.setItem("assignment3-complete", true); // store completion flag
+
+    // Show next assignment button
+    const nextBtn = document.createElement("a");
+    nextBtn.href = "assignment4.html";
+    nextBtn.innerText = "Next Assignment →";
+    nextBtn.className = "next-btn";
+    document.querySelector(".assignment-container").appendChild(nextBtn);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!-- final-assessment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Prelims Assessment</title>
+  <link rel="stylesheet" href="../assets/css/assignment.css">
+  <style>
+    .hidden { display: none; }
+    .certificate-btn {
+      padding: 12px 20px;
+      background-color: green;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="assignment-container">
+    <h2>📜 Final Prelims Assessment</h2>
+    <p>Answer the following 15 questions carefully. You need at least 8 correct to pass.</p>
+    <form id="finalForm">
+      <ol>
+        <!-- Questions go here (unchanged) -->
+        <li>Which article of the Constitution deals with Emergency Provisions?
+          <br><input type="radio" name="q1" value="A"> A. Article 32
+          <br><input type="radio" name="q1" value="B"> B. Article 352
+          <br><input type="radio" name="q1" value="C"> C. Article 370
+        </li>
+        <li>Which river is known as the "Ganga of the South"?
+          <br><input type="radio" name="q2" value="A"> A. Kaveri
+          <br><input type="radio" name="q2" value="B"> B. Godavari
+          <br><input type="radio" name="q2" value="C"> C. Krishna
+        </li>
+        <li>Who was the first Governor-General of independent India?
+          <br><input type="radio" name="q3" value="A"> A. C. Rajagopalachari
+          <br><input type="radio" name="q3" value="B"> B. Lord Mountbatten
+          <br><input type="radio" name="q3" value="C"> C. Jawaharlal Nehru
+        </li>
+        <li>The Rajya Sabha is a:
+          <br><input type="radio" name="q4" value="A"> A. Permanent house
+          <br><input type="radio" name="q4" value="B"> B. Temporary house
+          <br><input type="radio" name="q4" value="C"> C. Advisory body
+        </li>
+        <li>Which schedule of the Indian Constitution lists the official languages?
+          <br><input type="radio" name="q5" value="A"> A. 6th Schedule
+          <br><input type="radio" name="q5" value="B"> B. 8th Schedule
+          <br><input type="radio" name="q5" value="C"> C. 9th Schedule
+        </li>
+        <li>The largest planet in the solar system is:
+          <br><input type="radio" name="q6" value="A"> A. Saturn
+          <br><input type="radio" name="q6" value="B"> B. Jupiter
+          <br><input type="radio" name="q6" value="C"> C. Mars
+        </li>
+        <li>GDP stands for:
+          <br><input type="radio" name="q7" value="A"> A. Gross Domestic Product
+          <br><input type="radio" name="q7" value="B"> B. General Domestic Price
+          <br><input type="radio" name="q7" value="C"> C. Government Development Plan
+        </li>
+        <li>Which of the following is a Directive Principle of State Policy?
+          <br><input type="radio" name="q8" value="A"> A. Right to Education
+          <br><input type="radio" name="q8" value="B"> B. Equal pay for equal work
+          <br><input type="radio" name="q8" value="C"> C. Freedom of speech
+        </li>
+        <li>WTO stands for:
+          <br><input type="radio" name="q9" value="A"> A. World Trade Order
+          <br><input type="radio" name="q9" value="B"> B. World Trade Organization
+          <br><input type="radio" name="q9" value="C"> C. World Tax Organisation
+        </li>
+        <li>Which body conducts UPSC exams?
+          <br><input type="radio" name="q10" value="A"> A. SSC
+          <br><input type="radio" name="q10" value="B"> B. UPSC
+          <br><input type="radio" name="q10" value="C"> C. PSC
+        </li>
+        <li>India became a republic on:
+          <br><input type="radio" name="q11" value="A"> A. 15th August 1947
+          <br><input type="radio" name="q11" value="B"> B. 26th January 1950
+          <br><input type="radio" name="q11" value="C"> C. 26th November 1949
+        </li>
+        <li>How many states are there in India (as of 2024)?
+          <br><input type="radio" name="q12" value="A"> A. 28
+          <br><input type="radio" name="q12" value="B"> B. 29
+          <br><input type="radio" name="q12" value="C"> C. 30
+        </li>
+        <li>Who appoints the Chief Election Commissioner?
+          <br><input type="radio" name="q13" value="A"> A. Prime Minister
+          <br><input type="radio" name="q13" value="B"> B. President
+          <br><input type="radio" name="q13" value="C"> C. Lok Sabha Speaker
+        </li>
+        <li>Which state has the longest coastline in India?
+          <br><input type="radio" name="q14" value="A"> A. Tamil Nadu
+          <br><input type="radio" name="q14" value="B"> B. Gujarat
+          <br><input type="radio" name="q14" value="C"> C. Maharashtra
+        </li>
+        <li>Planning Commission was replaced by:
+          <br><input type="radio" name="q15" value="A"> A. NITI Aayog
+          <br><input type="radio" name="q15" value="B"> B. Economic Council
+          <br><input type="radio" name="q15" value="C"> C. National Planning Board
+        </li>
+      </ol>
+      <button type="submit" class="submit-btn">Submit Assessment</button>
+    </form>
+
+    <div id="resultMsg" class="hidden"></div>
+    <a href="certificate.html" id="certBtn" class="certificate-btn hidden">🎉 View Certificate</a>
+  </div>
+
+  <script>
+    document.getElementById("finalForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const answers = ["B", "A", "B", "A", "B", "B", "A", "B", "B", "B", "B", "A", "B", "B", "A"];
+      let score = 0;
+      for (let i = 1; i <= answers.length; i++) {
+        const selected = document.querySelector(`input[name='q${i}']:checked`);
+        if (selected && selected.value === answers[i - 1]) {
+          score++;
+        }
+      }
+      const resultMsg = document.getElementById("resultMsg");
+      resultMsg.classList.remove("hidden");
+      if (score >= 8) {
+        resultMsg.innerHTML = `✅ You passed with ${score}/15! Click below to view your certificate.`;
+        localStorage.setItem("finalPrelimsScore", score);
+        document.getElementById("certBtn").classList.remove("hidden");
+      } else {
+        resultMsg.innerHTML = `❌ You scored ${score}/15. Please try again to pass.`;
+      }
+    });
+
+    // Check unlock condition for 10 assignments
+    let allComplete = true;
+    for (let i = 1; i <= 10; i++) {
+      if (!localStorage.getItem(`assignment${i}`)) {
+        allComplete = false;
+        break;
+      }
+    }
+    if (!allComplete) {
+      alert("⚠️ Complete all 10 assignments to unlock the final assessment.");
+      document.querySelector("form").style.display = "none";
+    }
+  </script>
+</body>
+</html>

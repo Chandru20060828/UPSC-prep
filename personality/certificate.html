@@ -1,0 +1,108 @@
+<!-- certificate.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personality Test Certificate</title>
+  <link rel="stylesheet" href="../assets/css/assignment.css" />
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+      padding: 30px;
+    }
+    .certificate-box {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 40px;
+      text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.15);
+      display: none;
+    }
+    .certificate-box h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    .certificate-box h2 {
+      margin: 10px 0;
+    }
+    .certificate-box p {
+      font-size: 1.2em;
+      margin: 20px 0;
+    }
+    .download-btn {
+      background: #8e44ad;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .download-btn:hover {
+      background: #732d91;
+    }
+    .locked {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #fff3f3;
+      color: #a00;
+      text-align: center;
+      border: 2px solid #ffcccc;
+      border-radius: 12px;
+      font-size: 1.2em;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate-box" id="certificateBox">
+    <h1>🎓 UPSC Personality Test</h1>
+    <h2>Certificate of Completion</h2>
+    <p>This is to certify that</p>
+    <h2 id="studentName">[Your Name]</h2>
+    <p>has successfully completed the Personality Test round of UPSC preparation.</p>
+    <p>Date: <span id="date"></span></p>
+    <button class="download-btn" onclick="downloadCertificate()">⬇ Download Certificate</button>
+  </div>
+
+  <div class="locked" id="lockedMessage" style="display: none;">
+    ⚠️ You must complete the Personality Test first before accessing this certificate.<br>
+    Please go back and complete the <strong>questions</strong> to unlock this page.
+  </div>
+
+  <script>
+    const isCompleted = localStorage.getItem("personalityCompleted") === "true";
+    const certificateBox = document.getElementById("certificateBox");
+    const lockedMessage = document.getElementById("lockedMessage");
+
+    if (isCompleted) {
+      certificateBox.style.display = "block";
+      lockedMessage.style.display = "none";
+
+      const name = localStorage.getItem("studentName") || "Your Name";
+      const today = new Date().toLocaleDateString();
+
+      document.getElementById("studentName").innerText = name;
+      document.getElementById("date").innerText = today;
+
+      window.downloadCertificate = function () {
+        const content = `UPSC Personality Test - Certificate of Completion\n\nThis is to certify that ${name} has successfully completed the Personality Test preparation.\nDate: ${today}`;
+        const blob = new Blob([content], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "personality-certificate.txt";
+        link.click();
+      }
+    } else {
+      certificateBox.style.display = "none";
+      lockedMessage.style.display = "block";
+    }
+  </script>
+</body>
+</html>

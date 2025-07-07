@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mains - Assignment 2</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e8f4ff, #f0faff);
+      margin: 0;
+      padding: 0;
+    }
+
+    .assignment-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 { color: #004080; }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .submit-btn, #downloadBtn, #nextBtn {
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      margin-right: 10px;
+    }
+
+    .submit-btn:hover, #downloadBtn:hover, #nextBtn:hover {
+      background-color: #005f99;
+    }
+
+    .ref-material {
+      background: #f0f8ff;
+      padding: 15px;
+      border-left: 5px solid #007acc;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    .feedback {
+      margin-bottom: 15px;
+      font-weight: bold;
+      color: green;
+    }
+
+    .inline-feedback {
+      color: #444;
+      font-size: 0.95em;
+      margin-bottom: 10px;
+    }
+
+    #confirmationMsg {
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    #downloadBtn, #nextBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="assignment-container">
+    <h2>📘 Mains Assignment 2: Indian Polity & Constitution</h2>
+
+    <div class="ref-material">
+      <h3>Reference Material</h3>
+      <ul>
+        <li><a href="https://www.india.gov.in/my-government/constitution-india" target="_blank">Indian Constitution (Official Govt. Site)</a></li>
+        <li><a href="https://legislative.gov.in/sites/default/files/coi-4March2016.pdf" target="_blank">Download Constitution PDF</a></li>
+      </ul>
+    </div>
+
+    <form id="assignment2Form">
+      <ol>
+        <li>Explain the significance of the Preamble in the Indian Constitution.<br>
+          <textarea name="q1" required></textarea>
+          <div class="inline-feedback" id="q1fb"></div>
+        </li>
+        <li>What are the Fundamental Rights guaranteed by the Constitution?<br>
+          <textarea name="q2" required></textarea>
+          <div class="inline-feedback" id="q2fb"></div>
+        </li>
+        <li>Discuss the Directive Principles of State Policy.<br>
+          <textarea name="q3" required></textarea>
+          <div class="inline-feedback" id="q3fb"></div>
+        </li>
+        <li>How is the President of India elected?<br>
+          <textarea name="q4" required></textarea>
+          <div class="inline-feedback" id="q4fb"></div>
+        </li>
+        <li>Describe the role of the Rajya Sabha.<br>
+          <textarea name="q5" required></textarea>
+          <div class="inline-feedback" id="q5fb"></div>
+        </li>
+        <li>What is the process of constitutional amendment in India?<br>
+          <textarea name="q6" required></textarea>
+          <div class="inline-feedback" id="q6fb"></div>
+        </li>
+        <li>Differentiate between the powers of Lok Sabha and Rajya Sabha.<br>
+          <textarea name="q7" required></textarea>
+          <div class="inline-feedback" id="q7fb"></div>
+        </li>
+        <li>Explain the concept of Judicial Review.<br>
+          <textarea name="q8" required></textarea>
+          <div class="inline-feedback" id="q8fb"></div>
+        </li>
+        <li>Describe the emergency provisions under Article 352.<br>
+          <textarea name="q9" required></textarea>
+          <div class="inline-feedback" id="q9fb"></div>
+        </li>
+        <li>Write about the Election Commission of India.<br>
+          <textarea name="q10" required></textarea>
+          <div class="inline-feedback" id="q10fb"></div>
+        </li>
+      </ol>
+
+      <button type="submit" class="submit-btn">✅ Submit Assignment</button>
+      <button type="button" id="downloadBtn">⬇️ Download Answers</button>
+      <a href="assignment3.html" id="nextBtn">⏭️ Next Assignment</a>
+    </form>
+
+    <div id="confirmationMsg"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("assignment2Form");
+    const confirmationMsg = document.getElementById("confirmationMsg");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const feedbackDivs = Array.from({ length: 10 }, (_, i) =>
+      document.getElementById(`q${i + 1}fb`)
+    );
+
+    const answerKey = "mainsAssignment2";
+
+    // Keyword sets for each question
+    const keywordSets = [
+      ["preamble", "introduction", "philosophy", "constitution"],
+      ["rights", "freedom", "equality", "speech", "religion"],
+      ["directive", "dpsp", "state policy", "guidelines"],
+      ["president", "electoral college", "mla", "mp", "votes"],
+      ["rajya sabha", "upper house", "states", "parliament"],
+      ["amendment", "change", "article 368", "procedure"],
+      ["lok sabha", "lower house", "powers", "difference"],
+      ["judicial", "review", "supreme court", "constitutionality"],
+      ["emergency", "article 352", "war", "security"],
+      ["election", "commission", "ec", "poll", "conduct"]
+    ];
+
+    window.onload = () => {
+      const saved = JSON.parse(localStorage.getItem(answerKey));
+      if (saved) {
+        saved.forEach((ans, i) => {
+          document.querySelector(`[name='q${i + 1}']`).value = ans.replace(/^Q\d+:\n/, "").trim();
+          feedbackDivs[i].innerText = "✅ Answer previously submitted.";
+        });
+        confirmationMsg.innerText = "✅ Previously submitted.";
+        downloadBtn.style.display = "inline-block";
+        nextBtn.style.display = "inline-block";
+      }
+    };
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const answers = [];
+      let totalScore = 0;
+
+      for (let i = 0; i < 10; i++) {
+        const ans = document.querySelector(`[name='q${i + 1}']`).value.trim();
+        if (ans.length < 30) {
+          alert(`❌ Answer ${i + 1} must be at least 30 characters.`);
+          return;
+        }
+
+        const lowerAns = ans.toLowerCase();
+        const matched = keywordSets[i].some(keyword => lowerAns.includes(keyword));
+        if (matched) {
+          feedbackDivs[i].innerText = `✅ Good! Relevant keyword(s) detected.`;
+          totalScore++;
+        } else {
+          feedbackDivs[i].innerText = `⚠️ Consider including concepts like: ${keywordSets[i].join(", ")}`;
+        }
+
+        answers.push(`Q${i + 1}:\n${ans}\n`);
+      }
+
+      localStorage.setItem(answerKey, JSON.stringify(answers));
+      localStorage.setItem("mainsAssignment2Score", totalScore);
+
+      confirmationMsg.innerText = `✅ Assignment 2 submitted! Score: ${totalScore}/10 (keyword relevance)`;
+      downloadBtn.style.display = "inline-block";
+      nextBtn.style.display = "inline-block";
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      const data = JSON.parse(localStorage.getItem(answerKey));
+      const blob = new Blob([data.join("\n")], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "mains-assignment2.txt";
+      link.click();
+    });
+  </script>
+</body>
+</html>

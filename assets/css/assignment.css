@@ -1,0 +1,132 @@
+/* assignment.css */
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #fff);
+  color: #333;
+}
+
+.assignment-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffffd9;
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 2em;
+  text-align: center;
+  color: #00796b;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.1em;
+  text-align: center;
+  color: #444;
+}
+
+ol {
+  padding-left: 20px;
+  margin-top: 20px;
+}
+
+li {
+  margin-bottom: 25px;
+  background: #e0f2f1;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+input[type="radio"] {
+  margin-right: 8px;
+}
+
+.submit-btn {
+  display: block;
+  margin: 30px auto 10px auto;
+  padding: 14px 28px;
+  background: linear-gradient(to right, #26a69a, #00897b);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #009688, #004d40);
+}
+
+.result-box {
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 25px;
+  color: #388e3c;
+  font-weight: bold;
+}
+
+.reference-section {
+  margin-top: 40px;
+  background: #f1f8e9;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 128, 0, 0.1);
+}
+
+.reference-section h3 {
+  color: #33691e;
+  margin-bottom: 12px;
+}
+
+.reference-section a {
+  color: #1e88e5;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.reference-section a:hover {
+  text-decoration: underline;
+}
+
+.youtube-video {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.youtube-video iframe {
+  width: 100%;
+  max-width: 600px;
+  height: 340px;
+  border-radius: 12px;
+  border: none;
+}
+
+.certificate-btn {
+  display: inline-block;
+  margin: 20px auto 0;
+  padding: 12px 20px;
+  background: #43a047;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+.certificate-btn:hover {
+  background: #2e7d32;
+}
+
+.hidden {
+  display: none;
+}

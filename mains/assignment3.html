@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mains - Assignment 3</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f8fbff, #dceeff);
+      margin: 0;
+      padding: 0;
+    }
+
+    .assignment-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 { color: #004080; }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      font-size: 15px;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    .submit-btn, #downloadBtn, #nextBtn {
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      margin-right: 10px;
+    }
+
+    .submit-btn:hover, #downloadBtn:hover, #nextBtn:hover {
+      background-color: #0d47a1;
+    }
+
+    .ref-material {
+      background: #f0f8ff;
+      padding: 15px;
+      border-left: 5px solid #007acc;
+      margin-bottom: 30px;
+      border-radius: 10px;
+    }
+
+    #confirmationMsg {
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .inline-feedback {
+      color: #444;
+      font-size: 0.95em;
+      margin-bottom: 10px;
+    }
+
+    #downloadBtn, #nextBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="assignment-container">
+    <h2>📘 Mains Assignment 3: Governance and Public Policy</h2>
+
+    <div class="ref-material">
+      <h3>Reference Materials:</h3>
+      <ul>
+        <li><a href="https://www.pib.gov.in/" target="_blank">PIB - Press Information Bureau</a></li>
+        <li><a href="https://www.niti.gov.in/" target="_blank">NITI Aayog Reports</a></li>
+        <li><a href="https://yojana.gov.in/" target="_blank">Yojana Magazine</a></li>
+      </ul>
+    </div>
+
+    <form id="assignment3Form">
+      <ol>
+        <li>Define governance and its key components.<br><textarea name="q1" required></textarea><div class="inline-feedback" id="q1fb"></div></li>
+        <li>Explain the role of civil society in democratic governance.<br><textarea name="q2" required></textarea><div class="inline-feedback" id="q2fb"></div></li>
+        <li>What are the challenges in e-governance implementation?<br><textarea name="q3" required></textarea><div class="inline-feedback" id="q3fb"></div></li>
+        <li>Discuss the importance of accountability and transparency in governance.<br><textarea name="q4" required></textarea><div class="inline-feedback" id="q4fb"></div></li>
+        <li>Write about Right to Information (RTI) Act and its significance.<br><textarea name="q5" required></textarea><div class="inline-feedback" id="q5fb"></div></li>
+        <li>What are the major recommendations of the 2nd ARC?<br><textarea name="q6" required></textarea><div class="inline-feedback" id="q6fb"></div></li>
+        <li>Explain the role of NITI Aayog in public policy formulation.<br><textarea name="q7" required></textarea><div class="inline-feedback" id="q7fb"></div></li>
+        <li>What is Good Governance Index (GGI)?<br><textarea name="q8" required></textarea><div class="inline-feedback" id="q8fb"></div></li>
+        <li>How do social audits improve governance?<br><textarea name="q9" required></textarea><div class="inline-feedback" id="q9fb"></div></li>
+        <li>Discuss the Citizen Charter and its effectiveness.<br><textarea name="q10" required></textarea><div class="inline-feedback" id="q10fb"></div></li>
+      </ol>
+      <button type="submit" class="submit-btn">✅ Submit Assignment</button>
+      <button type="button" id="downloadBtn">⬇️ Download Answers</button>
+      <a href="assignment4.html" id="nextBtn">⏭️ Next Assignment</a>
+    </form>
+
+    <div id="confirmationMsg"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("assignment3Form");
+    const confirmationMsg = document.getElementById("confirmationMsg");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    const feedbackDivs = Array.from({ length: 10 }, (_, i) =>
+      document.getElementById(`q${i + 1}fb`)
+    );
+
+    const keywordSets = [
+      ["governance", "decision-making", "institutions", "public services"],
+      ["civil society", "ngo", "activists", "advocacy"],
+      ["e-governance", "digital", "ICT", "challenges"],
+      ["accountability", "transparency", "corruption", "citizens"],
+      ["rti", "right to information", "access", "transparency"],
+      ["2nd arc", "administrative", "reforms", "report"],
+      ["niti aayog", "policy", "planning", "think tank"],
+      ["good governance", "ggi", "index", "ranking"],
+      ["social audit", "evaluation", "participation", "monitoring"],
+      ["citizen charter", "standards", "grievance", "rights"]
+    ];
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const answers = [];
+      let score = 0;
+
+      for (let i = 0; i < 10; i++) {
+        const textarea = document.querySelector(`[name='q${i + 1}']`);
+        const ans = textarea.value.trim();
+        const ansLower = ans.toLowerCase();
+
+        if (ans.length < 30) {
+          alert(`Answer ${i + 1} must be at least 30 characters.`);
+          return;
+        }
+
+        const match = keywordSets[i].some(keyword => ansLower.includes(keyword));
+        if (match) {
+          feedbackDivs[i].innerText = "✅ Relevant keywords found.";
+          score++;
+        } else {
+          feedbackDivs[i].innerText = "⚠️ Try including keywords like: " + keywordSets[i].join(", ");
+        }
+
+        answers.push(`Q${i + 1}:\n${ans}\n`);
+      }
+
+      localStorage.setItem("mainsAssignment3", JSON.stringify(answers));
+      localStorage.setItem("mainsAssignment3Score", score);
+
+      confirmationMsg.innerText = `✅ Assignment 3 submitted! Score: ${score}/10`;
+      downloadBtn.style.display = "inline-block";
+      nextBtn.style.display = "inline-block";
+    });
+
+    downloadBtn.addEventListener("click", function () {
+      const data = JSON.parse(localStorage.getItem("mainsAssignment3"));
+      const blob = new Blob([data.join("\n")], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "mains-assignment3.txt";
+      link.click();
+    });
+  </script>
+</body>
+</html>

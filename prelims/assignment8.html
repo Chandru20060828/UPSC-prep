@@ -1,0 +1,132 @@
+<!-- assignment5.html -->
+<!-- (unchanged content for assignment5) -->
+
+<!-- assignment6.html -->
+<!-- (unchanged content for assignment6) -->
+
+<!-- assignment7.html -->
+<!-- (unchanged content for assignment7) -->
+
+<!-- assignment8.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 8 - Prelims</title>
+  <link rel="stylesheet" href="../assets/css/assignment.css">
+</head>
+<style>
+  .next-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+
+  .next-btn:hover {
+    background: #218838;
+  }
+</style>
+<body>
+  <div class="assignment-container">
+    <h2>Assignment 8: Geography - Indian Rivers and Water Resources</h2>
+    <form id="quizForm8">
+      <ol>
+        <li>Which is the longest river in India?
+          <br><input type="radio" name="q1" value="A"> A. Yamuna
+          <br><input type="radio" name="q1" value="B"> B. Ganga
+          <br><input type="radio" name="q1" value="C"> C. Brahmaputra
+        </li>
+        <li>The Mahanadi river flows through which state primarily?
+          <br><input type="radio" name="q2" value="A"> A. Odisha
+          <br><input type="radio" name="q2" value="B"> B. Andhra Pradesh
+          <br><input type="radio" name="q2" value="C"> C. Gujarat
+        </li>
+        <li>Which river is called the 'Sorrow of Bihar'?
+          <br><input type="radio" name="q3" value="A"> A. Ganga
+          <br><input type="radio" name="q3" value="B"> B. Damodar
+          <br><input type="radio" name="q3" value="C"> C. Kosi
+        </li>
+        <li>Which dam is built on the river Krishna?
+          <br><input type="radio" name="q4" value="A"> A. Bhakra Nangal
+          <br><input type="radio" name="q4" value="B"> B. Sardar Sarovar
+          <br><input type="radio" name="q4" value="C"> C. Nagarjuna Sagar
+        </li>
+        <li>Tehri Dam is located in which Indian state?
+          <br><input type="radio" name="q5" value="A"> A. Uttarakhand
+          <br><input type="radio" name="q5" value="B"> B. Himachal Pradesh
+          <br><input type="radio" name="q5" value="C"> C. Punjab
+        </li>
+        <li>Which of these rivers does NOT flow into the Bay of Bengal?
+          <br><input type="radio" name="q6" value="A"> A. Mahanadi
+          <br><input type="radio" name="q6" value="B"> B. Godavari
+          <br><input type="radio" name="q6" value="C"> C. Narmada
+        </li>
+        <li>Which river flows through the Thar Desert?
+          <br><input type="radio" name="q7" value="A"> A. Chambal
+          <br><input type="radio" name="q7" value="B"> B. Luni
+          <br><input type="radio" name="q7" value="C"> C. Beas
+        </li>
+        <li>Which river originates from the Amarkantak Plateau?
+          <br><input type="radio" name="q8" value="A"> A. Godavari
+          <br><input type="radio" name="q8" value="B"> B. Narmada
+          <br><input type="radio" name="q8" value="C"> C. Yamuna
+        </li>
+        <li>Which is the largest river basin in India?
+          <br><input type="radio" name="q9" value="A"> A. Ganga
+          <br><input type="radio" name="q9" value="B"> B. Indus
+          <br><input type="radio" name="q9" value="C"> C. Krishna
+        </li>
+        <li>Which of the following rivers is not a tributary of the Ganga?
+          <br><input type="radio" name="q10" value="A"> A. Yamuna
+          <br><input type="radio" name="q10" value="B"> B. Son
+          <br><input type="radio" name="q10" value="C"> C. Mahi
+        </li>
+      </ol>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <div class="references">
+      <h3>📚 Reference Materials:</h3>
+      <ul>
+        <li><a href="https://ncert.nic.in/textbook.php?legy1=0-9" target="_blank">NCERT Geography Class 9–12</a></li>
+        <li><a href="https://www.indiawaterportal.org/" target="_blank">India Water Portal</a></li>
+      </ul>
+    </div>
+
+    <div class="video-section">
+      <h3>🎥 Watch: Indian Rivers Map - Explained</h3>
+      <li><a href="https://www.youtube.com/live/K_f1tx22kC0?si=m0Vlm65zt3AigO4B" target="_blank">Indian Rivers</a></li>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("quizForm8").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const answers = ["B", "A", "C", "C", "A", "C", "B", "B", "A", "C"];
+      let score = 0;
+      for (let i = 1; i <= 10; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && selected.value === answers[i - 1]) {
+          score++;
+        }
+      }
+      alert(`✅ You scored: ${score}/10`);
+      localStorage.setItem("assignment8", score);
+      localStorage.setItem("assignment8-complete", true); // store completion flag
+
+    // Show next assignment button
+    const nextBtn = document.createElement("a");
+    nextBtn.href = "assignment9.html";
+    nextBtn.innerText = "Next Assignment →";
+    nextBtn.className = "next-btn";
+    document.querySelector(".assignment-container").appendChild(nextBtn);
+    });
+  </script>
+</body>
+</html>

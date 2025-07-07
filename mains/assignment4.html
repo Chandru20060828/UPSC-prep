@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mains - Assignment 4</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #eef7ff, #e0f3ff);
+      margin: 0;
+      padding: 0;
+    }
+
+    .assignment-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 { color: #004080; }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      font-size: 15px;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    .submit-btn, #downloadBtn, #nextBtn {
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      margin-right: 10px;
+    }
+
+    .submit-btn:hover, #downloadBtn:hover, #nextBtn:hover {
+      background-color: #0d47a1;
+    }
+
+    .ref-material {
+      background: #f0f8ff;
+      padding: 15px;
+      border-left: 5px solid #007acc;
+      margin-bottom: 30px;
+      border-radius: 10px;
+    }
+
+    .inline-feedback {
+      font-size: 0.95em;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    #confirmationMsg {
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    #downloadBtn, #nextBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="assignment-container">
+    <h2>📘 Mains Assignment 4: Social Justice & Welfare</h2>
+
+    <div class="ref-material">
+      <h3>Reference Materials:</h3>
+      <ul>
+        <li><a href="https://socialjustice.gov.in/" target="_blank">Ministry of Social Justice & Empowerment</a></li>
+        <li><a href="https://rural.nic.in/" target="_blank">Ministry of Rural Development</a></li>
+        <li><a href="https://yojana.gov.in/" target="_blank">Yojana Magazine Archives</a></li>
+      </ul>
+    </div>
+
+    <form id="assignment4Form">
+      <ol>
+        <li>What is the significance of social justice in a democracy?<br><textarea name="q1" required></textarea><div class="inline-feedback" id="q1fb"></div></li>
+        <li>Discuss the role of reservation in promoting equity.<br><textarea name="q2" required></textarea><div class="inline-feedback" id="q2fb"></div></li>
+        <li>List major schemes for the upliftment of SC/ST communities.<br><textarea name="q3" required></textarea><div class="inline-feedback" id="q3fb"></div></li>
+        <li>How does MGNREGA contribute to rural welfare?<br><textarea name="q4" required></textarea><div class="inline-feedback" id="q4fb"></div></li>
+        <li>Explain the impact of PM Jan Dhan Yojana on financial inclusion.<br><textarea name="q5" required></textarea><div class="inline-feedback" id="q5fb"></div></li>
+        <li>Write about challenges in implementing welfare schemes.<br><textarea name="q6" required></textarea><div class="inline-feedback" id="q6fb"></div></li>
+        <li>How does the National Social Assistance Programme support the elderly and poor?<br><textarea name="q7" required></textarea><div class="inline-feedback" id="q7fb"></div></li>
+        <li>Discuss the role of women-centric schemes in empowerment.<br><textarea name="q8" required></textarea><div class="inline-feedback" id="q8fb"></div></li>
+        <li>Explain the importance of education and health schemes in social justice.<br><textarea name="q9" required></textarea><div class="inline-feedback" id="q9fb"></div></li>
+        <li>Suggest measures to ensure effective delivery of government schemes.<br><textarea name="q10" required></textarea><div class="inline-feedback" id="q10fb"></div></li>
+      </ol>
+
+      <button type="submit" class="submit-btn">✅ Submit Assignment</button>
+      <button type="button" id="downloadBtn">⬇️ Download Answers</button>
+      <a href="assignment5.html" id="nextBtn">⏭️ Next Assignment</a>
+    </form>
+
+    <div id="confirmationMsg"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("assignment4Form");
+    const confirmationMsg = document.getElementById("confirmationMsg");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    const feedbackDivs = Array.from({ length: 10 }, (_, i) =>
+      document.getElementById(`q${i + 1}fb`)
+    );
+
+    const keywordSets = [
+      ["social justice", "equality", "discrimination", "rights"],
+      ["reservation", "quota", "affirmative action", "equity"],
+      ["sc", "st", "tribal", "upliftment", "schemes"],
+      ["mgnrega", "employment", "wages", "rural"],
+      ["jan dhan", "bank", "account", "financial inclusion"],
+      ["challenges", "implementation", "corruption", "leakage"],
+      ["national social assistance", "pension", "elderly", "poor"],
+      ["women", "empowerment", "beti", "mahila", "scheme"],
+      ["education", "health", "ayushman", "midday", "justice"],
+      ["delivery", "monitoring", "technology", "dbt", "transparency"]
+    ];
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const answers = [];
+      let score = 0;
+
+      for (let i = 0; i < 10; i++) {
+        const ans = document.querySelector(`[name='q${i + 1}']`).value.trim().toLowerCase();
+        if (ans.length < 30) {
+          alert(`❌ Answer ${i + 1} must be at least 30 characters.`);
+          return;
+        }
+
+        const match = keywordSets[i].some(keyword => ans.includes(keyword));
+        if (match) {
+          feedbackDivs[i].innerText = "✅ Relevant keywords found.";
+          score++;
+        } else {
+          feedbackDivs[i].innerText = "⚠️ Try including keywords like: " + keywordSets[i].join(", ");
+        }
+
+        answers.push(`Q${i + 1}:\n${ans}\n`);
+      }
+
+      localStorage.setItem("mainsAssignment4", JSON.stringify(answers));
+      localStorage.setItem("mainsAssignment4Score", score);
+
+      confirmationMsg.innerText = `✅ Assignment 4 submitted! Keyword Match Score: ${score}/10`;
+      downloadBtn.style.display = "inline-block";
+      nextBtn.style.display = "inline-block";
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      const data = JSON.parse(localStorage.getItem("mainsAssignment4"));
+      const blob = new Blob([data.join("\n")], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "mains-assignment4.txt";
+      link.click();
+    });
+  </script>
+</body>
+</html>

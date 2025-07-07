@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mains - Assignment 5</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f2fcff, #dff5ff);
+      margin: 0;
+      padding: 0;
+    }
+
+    .assignment-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    h2 { color: #004080; }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      font-size: 15px;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+    }
+
+    .submit-btn, #downloadBtn, #certificateBtn {
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      margin-right: 10px;
+    }
+
+    .submit-btn:hover, #downloadBtn:hover, #certificateBtn:hover {
+      background-color: #0d47a1;
+    }
+
+    .ref-material {
+      background: #f0f8ff;
+      padding: 15px;
+      border-left: 5px solid #007acc;
+      margin-bottom: 30px;
+      border-radius: 10px;
+    }
+
+    .inline-feedback {
+      font-size: 0.95em;
+      color: #444;
+      margin-bottom: 10px;
+    }
+
+    #confirmationMsg {
+      color: green;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    #downloadBtn, #certificateBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="assignment-container">
+    <h2>📘 Mains Assignment 5: Ethics, Integrity & Aptitude</h2>
+
+    <div class="ref-material">
+      <h3>Reference Materials:</h3>
+      <ul>
+        <li><a href="https://www.drishtiias.com/to-the-points/paper4" target="_blank">Drishti IAS – Ethics Notes</a></li>
+        <li><a href="https://yojana.gov.in/" target="_blank">Yojana Magazine (Ethics Edition)</a></li>
+        <li><a href="https://arc.gov.in/" target="_blank">Second ARC Reports</a></li>
+      </ul>
+    </div>
+
+    <form id="assignment5Form">
+      <ol>
+        <li>Define ethics and explain its importance in public administration.<br><textarea name="q1" required></textarea><div class="inline-feedback" id="q1fb"></div></li>
+        <li>What is the difference between integrity and honesty?<br><textarea name="q2" required></textarea><div class="inline-feedback" id="q2fb"></div></li>
+        <li>Discuss the relevance of emotional intelligence for a civil servant.<br><textarea name="q3" required></textarea><div class="inline-feedback" id="q3fb"></div></li>
+        <li>Explain the concept of moral dilemmas and how to resolve them.<br><textarea name="q4" required></textarea><div class="inline-feedback" id="q4fb"></div></li>
+        <li>Write a short note on code of ethics and code of conduct.<br><textarea name="q5" required></textarea><div class="inline-feedback" id="q5fb"></div></li>
+        <li>How does attitude influence ethical decision-making?<br><textarea name="q6" required></textarea><div class="inline-feedback" id="q6fb"></div></li>
+        <li>Give examples of ethical issues in governance.<br><textarea name="q7" required></textarea><div class="inline-feedback" id="q7fb"></div></li>
+        <li>Explain the role of conscience in public life.<br><textarea name="q8" required></textarea><div class="inline-feedback" id="q8fb"></div></li>
+        <li>Describe the importance of transparency and accountability.<br><textarea name="q9" required></textarea><div class="inline-feedback" id="q9fb"></div></li>
+        <li>Suggest ways to promote ethical behavior in society.<br><textarea name="q10" required></textarea><div class="inline-feedback" id="q10fb"></div></li>
+      </ol>
+
+      <button type="submit" class="submit-btn">✅ Submit Final Assignment</button>
+      <button type="button" id="downloadBtn">⬇️ Download Answers</button>
+      <a href="certificate.html" id="certificateBtn">🎓 View Certificate</a>
+    </form>
+
+    <div id="confirmationMsg"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById("assignment5Form");
+    const confirmationMsg = document.getElementById("confirmationMsg");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const certificateBtn = document.getElementById("certificateBtn");
+
+    const feedbackDivs = Array.from({ length: 10 }, (_, i) =>
+      document.getElementById(`q${i + 1}fb`)
+    );
+
+    const keywordSets = [
+      ["ethics", "values", "morality", "principles"],
+      ["integrity", "honesty", "difference", "truth"],
+      ["emotional intelligence", "empathy", "self-awareness"],
+      ["moral dilemma", "ethics", "conflict", "resolution"],
+      ["code of ethics", "code of conduct", "standards", "guidelines"],
+      ["attitude", "mindset", "behavior", "decision-making"],
+      ["corruption", "nepotism", "bias", "transparency"],
+      ["conscience", "inner voice", "public life", "ethics"],
+      ["transparency", "accountability", "governance"],
+      ["ethical behavior", "values", "education", "role model"]
+    ];
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const answers = [];
+      let score = 0;
+
+      for (let i = 0; i < 10; i++) {
+        const ans = document.querySelector(`[name='q${i + 1}']`).value.trim().toLowerCase();
+        if (ans.length < 30) {
+          alert(`❌ Answer ${i + 1} must be at least 30 characters.`);
+          return;
+        }
+
+        const matched = keywordSets[i].some(keyword => ans.includes(keyword));
+        if (matched) {
+          feedbackDivs[i].innerText = "✅ Good! Relevant keywords detected.";
+          score++;
+        } else {
+          feedbackDivs[i].innerText = "⚠️ Consider mentioning: " + keywordSets[i].join(", ");
+        }
+
+        answers.push(`Q${i + 1}:\n${ans}\n`);
+      }
+
+      localStorage.setItem("mainsAssignment5", JSON.stringify(answers));
+      localStorage.setItem("mainsAssignment5Score", score);
+      localStorage.setItem("mainsCompleted5", "true");
+
+      confirmationMsg.innerText = `✅ Final Assignment submitted! Score: ${score}/10`;
+      downloadBtn.style.display = "inline-block";
+
+      const done1 = localStorage.getItem("mainsCompleted1") === "true";
+      const done2 = localStorage.getItem("mainsCompleted2") === "true";
+      const done3 = localStorage.getItem("mainsCompleted3") === "true";
+      const done4 = localStorage.getItem("mainsCompleted4") === "true";
+      const done5 = localStorage.getItem("mainsCompleted5") === "true";
+
+      if (done1 && done2 && done3 && done4 && done5) {
+        certificateBtn.style.display = "inline-block";
+      } else {
+        alert("✅ Assignment saved. Complete all 5 to unlock your certificate.");
+      }
+    });
+
+    downloadBtn.addEventListener("click", () => {
+      const data = JSON.parse(localStorage.getItem("mainsAssignment5"));
+      const blob = new Blob([data.join("\n")], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "mains-assignment5.txt";
+      link.click();
+    });
+  </script>
+</body>
+</html>

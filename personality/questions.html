@@ -1,0 +1,171 @@
+<!-- questions.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personality Interview Questions</title>
+  <link rel="stylesheet" href="../assets/css/assignment.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    .questionnaire {
+      max-width: 900px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    ol {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 1rem;
+    }
+    button {
+      display: block;
+      margin: 20px auto 10px;
+      background: #ff758c;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background: #ff4f7a;
+    }
+    .message, #downloadBtn {
+      text-align: center;
+      margin-top: 20px;
+      display: none;
+    }
+    #downloadBtn {
+      background: #f8e1f4;
+      color: #333;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .feedback {
+      margin-top: 30px;
+      background: #f3f3f3;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .feedback h3 {
+      color: #d92b6f;
+    }
+    .feedback p {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="questionnaire">
+    <h2>🎤 Personality Interview Questions</h2>
+    <form id="personalityForm">
+      <ol>
+        <li>Tell us about yourself.<br><textarea name="q1" required></textarea></li>
+        <li>Why do you want to join civil services?<br><textarea name="q2" required></textarea></li>
+        <li>What are your strengths and weaknesses?<br><textarea name="q3" required></textarea></li>
+        <li>How do you handle stress and pressure?<br><textarea name="q4" required></textarea></li>
+        <li>Describe a situation where you resolved a conflict.<br><textarea name="q5" required></textarea></li>
+        <li>What are your views on public service and integrity?<br><textarea name="q6" required></textarea></li>
+        <li>How do you stay updated with current affairs?<br><textarea name="q7" required></textarea></li>
+        <li>What is your opinion on digital governance?<br><textarea name="q8" required></textarea></li>
+        <li>What do you think is the biggest challenge India is facing today?<br><textarea name="q9" required></textarea></li>
+        <li>Where do you see yourself in 10 years?<br><textarea name="q10" required></textarea></li>
+      </ol>
+      <button type="submit">Submit Answers</button>
+    </form>
+    <div class="message" id="confirmationMsg">✅ Submitted successfully! See suggestions below 👇</div>
+    <div class="message">
+      <button id="downloadBtn">⬇ Download Answers</button>
+    </div>
+    <div class="feedback" id="feedbackSection" style="display: none;">
+      <h3>📝 Feedback & Improvement Tips</h3>
+      <div id="feedbackContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("personalityForm");
+    const msg = document.getElementById("confirmationMsg");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const feedbackSection = document.getElementById("feedbackSection");
+    const feedbackContent = document.getElementById("feedbackContent");
+
+    const improvementTips = [
+      "Include brief background (education, interests, goals).",
+      "Mention service to nation, administrative passion, motivation.",
+      "Be honest but balance your strengths and real weaknesses.",
+      "Describe methods like meditation, time management, priorities.",
+      "Give a real-life example showing maturity and communication.",
+      "Define integrity, ethics, transparency, and public trust.",
+      "Mention reliable sources: newspaper, PIB, government apps.",
+      "Refer to efficiency, transparency, citizen access to services.",
+      "Mention unemployment, pollution, inequality, education, etc.",
+      "Link your career plan to nation-building and civil service."
+    ];
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const answers = [];
+      const feedbacks = [];
+      feedbackContent.innerHTML = "";
+      
+      for (let i = 1; i <= 10; i++) {
+        const textarea = document.querySelector(`[name='q${i}']`);
+        const val = textarea.value.trim();
+        answers.push(`Q${i}:\n${val}\n`);
+
+        if (val.length < 30) {
+          feedbacks.push(`<p><strong>Q${i}:</strong> Your answer is too short. ${improvementTips[i - 1]}</p>`);
+        } else {
+          feedbacks.push(`<p><strong>Q${i}:</strong> Looks good! You may still want to ensure: ${improvementTips[i - 1]}</p>`);
+        }
+      }
+
+      localStorage.setItem("personalityAnswers", JSON.stringify(answers));
+      localStorage.setItem("personalityCompleted", "true"); // ✅ Unlock certificate
+
+      msg.style.display = "block";
+      downloadBtn.style.display = "inline-block";
+      feedbackSection.style.display = "block";
+      feedbackContent.innerHTML = feedbacks.join("");
+    });
+
+    downloadBtn.addEventListener("click", function () {
+      const data = JSON.parse(localStorage.getItem("personalityAnswers"));
+      const blob = new Blob([data.join("\n")], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "personality-answers.txt";
+      link.click();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!-- assignment5.html -->
+<!-- (unchanged content for assignment5) -->
+
+<!-- assignment6.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assignment 6 - Prelims</title>
+  <link rel="stylesheet" href="../assets/css/assignment.css">
+</head>
+<style>
+  .next-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+
+  .next-btn:hover {
+    background: #218838;
+  }
+</style>
+<body>
+  <div class="assignment-container">
+    <h2>Assignment 6: Indian Polity - Fundamental Rights</h2>
+    <form id="quizForm">
+      <ol>
+        <li>Which Article of the Indian Constitution guarantees equality before law?
+          <br><input type="radio" name="q1" value="A"> A. Article 12
+          <br><input type="radio" name="q1" value="B"> B. Article 14
+          <br><input type="radio" name="q1" value="C"> C. Article 16
+        </li>
+        <li>Which Fundamental Right cannot be suspended even during Emergency?
+          <br><input type="radio" name="q2" value="A"> A. Right to Life
+          <br><input type="radio" name="q2" value="B"> B. Right to Education
+          <br><input type="radio" name="q2" value="C"> C. Right to Property
+        </li>
+        <li>Right to Education is covered under:
+          <br><input type="radio" name="q3" value="A"> A. Article 19
+          <br><input type="radio" name="q3" value="B"> B. Article 21A
+          <br><input type="radio" name="q3" value="C"> C. Article 23
+        </li>
+        <li>Who can enforce Fundamental Rights?
+          <br><input type="radio" name="q4" value="A"> A. Parliament
+          <br><input type="radio" name="q4" value="B"> B. President
+          <br><input type="radio" name="q4" value="C"> C. Supreme Court
+        </li>
+        <li>Which Article deals with abolition of Untouchability?
+          <br><input type="radio" name="q5" value="A"> A. Article 17
+          <br><input type="radio" name="q5" value="B"> B. Article 15
+          <br><input type="radio" name="q5" value="C"> C. Article 25
+        </li>
+        <li>Which right is called the "heart and soul" of the Constitution?
+          <br><input type="radio" name="q6" value="A"> A. Right to Life
+          <br><input type="radio" name="q6" value="B"> B. Right to Constitutional Remedies
+          <br><input type="radio" name="q6" value="C"> C. Right to Freedom of Religion
+        </li>
+        <li>Which Article provides freedom of speech?
+          <br><input type="radio" name="q7" value="A"> A. Article 18
+          <br><input type="radio" name="q7" value="B"> B. Article 19(1)(a)
+          <br><input type="radio" name="q7" value="C"> C. Article 20
+        </li>
+        <li>Who can amend Fundamental Rights?
+          <br><input type="radio" name="q8" value="A"> A. Supreme Court
+          <br><input type="radio" name="q8" value="B"> B. State Governments
+          <br><input type="radio" name="q8" value="C"> C. Parliament
+        </li>
+        <li>Right against Exploitation includes:
+          <br><input type="radio" name="q9" value="A"> A. Prohibition of Child Labour
+          <br><input type="radio" name="q9" value="B"> B. Abolition of Untouchability
+          <br><input type="radio" name="q9" value="C"> C. Right to Form Associations
+        </li>
+        <li>Article 21 ensures:
+          <br><input type="radio" name="q10" value="A"> A. Right to Equality
+          <br><input type="radio" name="q10" value="B"> B. Right to Life and Personal Liberty
+          <br><input type="radio" name="q10" value="C"> C. Right to Religion
+        </li>
+      </ol>
+      <button type="submit" class="submit-btn">Submit</button>
+    </form>
+
+    <div class="references">
+      <h3>📚 Reference Materials:</h3>
+      <ul>
+        <li><a href="https://legislative.gov.in/constitution-of-india" target="_blank">Official Constitution of India</a></li>
+        <li><a href="https://ncert.nic.in/textbook.php" target="_blank">NCERT Polity Class 11 & 12</a></li>
+      </ul>
+    </div>
+
+    <div class="video-section">
+      <h3>🎥 Watch: Fundamental Rights in the Indian Constitution</h3>
+      <li><a href="https://youtu.be/qIc1ouRCcMg?si=MbAvl4Pv0GJkv05q" target="_blank">Fundamental rights in Indian constitution</a></li>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("quizForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const answers = ["B", "A", "B", "C", "A", "B", "B", "C", "A", "B"];
+      let score = 0;
+      for (let i = 1; i <= 10; i++) {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if (selected && selected.value === answers[i - 1]) {
+          score++;
+        }
+      }
+      alert(`✅ You scored: ${score}/10`);
+      localStorage.setItem("assignment6", score);
+      localStorage.setItem("assignment6-complete", true); // store completion flag
+
+    // Show next assignment button
+    const nextBtn = document.createElement("a");
+    nextBtn.href = "assignment7.html";
+    nextBtn.innerText = "Next Assignment →";
+    nextBtn.className = "next-btn";
+    document.querySelector(".assignment-container").appendChild(nextBtn);
+    });
+  </script>
+</body>
+</html>
