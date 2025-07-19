@@ -1,0 +1,91 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #e3f2fd, #ffffff);
+  margin: 0;
+  padding: 0;
+  color: #1a237e;
+}
+
+.container {
+  max-width: 960px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 40px;
+}
+
+.news-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.news-card {
+  background-color: #f1f8ff;
+  border: 1px solid #bbdefb;
+  border-radius: 15px;
+  padding: 25px;
+  width: 280px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.news-card:hover {
+  transform: scale(1.03);
+}
+
+.news-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #0d47a1;
+}
+
+.news-card p {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.visit-btn {
+  display: inline-block;
+  padding: 10px 16px;
+  background-color: #1976d2;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.visit-btn:hover {
+  background-color: #0d47a1;
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 12px 24px;
+  background-color: #64b5f6;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #2196f3;
+}
